@@ -1,3 +1,5 @@
+package stub;
+
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 /**
@@ -5,20 +7,11 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
  */
 public class StubResponse {
 
-    public void setStubHelloWorld() {
+    public void setStubResponses() {
         stubFor(get(urlEqualTo("/hello"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody("Hello World")
-                        .withStatusMessage("Everything was just fine!")
-                        .withHeader("Content-Type", "text/plain")));
-    }
-
-    public void setStubByeWorld() {
-        stubFor(get(urlEqualTo("/bye"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withBody("Bye World")
                         .withStatusMessage("Everything was just fine!")
                         .withHeader("Content-Type", "text/plain")));
     }

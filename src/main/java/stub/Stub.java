@@ -1,7 +1,8 @@
+package stub;
+
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
 /**
@@ -14,6 +15,10 @@ public class Stub {
 
     private Stub(){}
 
+    public static void main (String[] args){
+        getInstance().startStubServer();
+    }
+
     public static Stub getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Stub();
@@ -21,14 +26,11 @@ public class Stub {
         return INSTANCE;
     }
 
-    public static void main (String[] args){
-        getInstance().startStubServer();
-    }
-
     public void startStubServer() {
         wireMockServer = new WireMockServer(wireMockConfig().port(9999));
         WireMock.configureFor(9999);
         wireMockServer.start();
+        new StubResponse().setStubResponses();
     }
 
     public void stopStubServer(){
